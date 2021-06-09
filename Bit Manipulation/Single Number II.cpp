@@ -46,7 +46,34 @@ Example Output 2:
 */
 
 Cpp code :
-// O(n) time complexity and O(n) space Complexity
+
+// O(n) time complexity and O(1) space Complexity
+
+int Solution::singleNumber(const vector<int> &A) {
+    
+    int n = A.size();
+    
+        int f[32]={0};
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<32;j++)
+            {
+                if((1<<j)&A[i])
+                f[j]++;
+            }
+        }
+        long long int res = 0;
+        
+        for(int i=0;i<32;i++)
+        {
+            res = res + (pow(2,i)*(f[i]%3));
+        }
+        
+        return res;
+}
+
+// or O(n) time complexity and O(n) space Complexity
 
 int Solution::singleNumber(const vector<int> &A) {
         unordered_map<int,int> ump;
